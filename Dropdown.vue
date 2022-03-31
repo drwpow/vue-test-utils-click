@@ -29,13 +29,13 @@ export default defineComponent({
   methods: {
     async toggleMenu() {
       if (this.isOpen) {
-        await this.close();
+        this.close();
       } else {
         await this.open();
       }
     },
     async open() {
-      await new Promise<void>((resolve) => setTimeout(() => resolve(), 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
       this.isOpen = true;
     },
     close() {
