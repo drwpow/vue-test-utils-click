@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Dropdown from './Dropdown.vue';
+import { pollUntil } from "./poll";
 
 describe('Dropdown', () => {
   it('click opens the dropdown', async () => {
@@ -9,6 +10,8 @@ describe('Dropdown', () => {
     expect(button.attributes('aria-expanded')).toBe('false'); // expect closed initially
 
     await button.trigger('keydown.space');
-    expect(button.attributes('aria-expanded')).toBe('true'); // expect open after click
+
+    // expect eventual open after click
+    await pollUntil(() => button.attributes('aria-expanded') === 'true')
   });
 });
